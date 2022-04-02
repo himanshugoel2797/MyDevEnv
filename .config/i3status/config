@@ -1,0 +1,40 @@
+general {
+	output_format = "i3bar"
+	colors = true
+	interval = 1
+}
+
+order += "disk /"
+order += "ethernet enp7s0"
+order += "memory"
+order += "load"
+order += "tztime local"
+
+ethernet enp7s0 {
+	format_up = "E: %ip"
+	format_down = "E: down"
+}
+
+tztime local {
+	format = "%Y-%m-%d %H:%M:%S"
+	hide_if_equals_localtime = false
+}
+
+load {
+	format = "%5min"
+}
+
+cpu_temperature 0 {
+	format = "T: %degrees C"
+	path = "/sys/devices/platform/coretemp.0/temp1_input"
+}
+
+memory {
+	format = "%used (%available)"
+	threshold_degraded = "10%"
+	format_degraded = "MEMORY: %free"
+}
+
+disk "/" {
+	format = "%free"
+}
