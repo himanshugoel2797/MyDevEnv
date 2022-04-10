@@ -4,7 +4,9 @@ set ignorecase
 set mouse=v
 set hlsearch
 set incsearch
-set filetype plugin on
+filetype on
+filetype plugin on
+filetype indent on
 
 " setup tabs
 set tabstop=4
@@ -37,17 +39,24 @@ endif
 
 call plug#begin("~/.vim/plugged")
     " Plugins
-    Plug 'dracula/vim'
+"   Plug 'dracula/vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-devicons'
     Plug 'mhinz/vim-startify'
     Plug 'scrooloose/nerdtree'
     Plug 'github/copilot.vim'
+    Plug 'tpope/vim-fugitive'
+    Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+    Plug 'junegunn/fzf'
+    Plug 'scrooloose/nerdcommenter'
     Plug 'chrisbra/csv.vim'
 call plug#end()
 
 " setup colorscheme
 syntax enable
-colorscheme dracula
+colorscheme gruvbox
 
 " setup keybindings
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -61,3 +70,9 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == ''
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
+" Airline config
+let g:airline_theme='gruvbox'
+let g:airline#extensions#tabline#enabled=1
+
+" LSP config
+let g:LanguageClient_serverCommands= { 'cpp': ['clangd'], 'c': ['clangd'], 'python': ['pyright'] }
