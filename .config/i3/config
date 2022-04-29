@@ -188,3 +188,5 @@ bindsym $mod+o move workspace to output left
 exec --no-startup-id ~/xrandr_startup.sh
 
 for_window [class="^.*"] border pixel 1
+
+bindsym $mod+Shift+s exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
