@@ -1,14 +1,13 @@
 #!/bin/sh
 
 sudo apt update
-sudo apt install python3 python3-pip cargo nodejs npm
+sudo apt install python3 python3-pip cargo 
 
 # Install neovim
 sudo apt install neovim
 sudo apt install python3-neovim
 
 sudo apt install fasd
-sudo npm install -g tldr
 sudo apt install mosh
 sudo apt install direnv
 
