@@ -38,3 +38,6 @@ call plug#end()
 
 " LSP config
 let g:LanguageClient_serverCommands= { 'cpp': ['clangd'], 'c': ['clangd'], 'python': ['pyright'] }
+
+" Colorscheme
+autocmd VimEnter * ++nested colorscheme gruvbox
