@@ -62,11 +62,21 @@ fi
 # Install neovim python package
 #python3 -m pip install --user --upgrade pynvim
 
+# Install vim-plug if not already installed
+if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
+    echo "Installing vim-plug..."
+    mkdir -p "$HOME/.vim/autoload"
+    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+    echo "vim-plug is already installed."
+fi
+
 # Apply the .vimrc configuration
-#echo "Applying .vimrc configuration..."
-#if [ -f .vimrc ]; then
-#    ln -s ~/.vimrc .vimrc
-#fi
+echo "Applying .vimrc configuration..."
+if [ -f .vimrc ]; then
+    ln -s ~/.vimrc .vimrc
+fi
 
 # Apply the .zshrc configuration if it exists
 echo "Applying .zshrc configuration..."
