@@ -68,11 +68,11 @@ fi
 # Apply the .vimrc configuration
 echo "Applying .vimrc configuration..."
 if [ -f .vimrc ]; then
-    ln -s ~/.vimrc .vimrc
+    ln -s .vimrc ~/.vimrc
 fi
 
 # Apply the .zshrc configuration if it exists
 echo "Applying .zshrc configuration..."
 if [ -f .zshrc ]; then
-    ln -s ~/.zshrc .zshrc
+    ln -s .zshrc ~/.zshrc
 fi
