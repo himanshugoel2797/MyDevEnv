@@ -3,6 +3,8 @@
 # Usage: ./build_env.sh --skip-conda # to skip conda package installation.
 set -e
 
+PWD=$(pwd)
+
 # Install dependencies if sudo is available
 if [ "$(id -u)" -eq 0 ]; then
     echo "Installing dependencies..."
@@ -68,7 +70,7 @@ fi
 # Apply the .vimrc configuration
 echo "Applying .vimrc configuration..."
 if [ ! -e ~/.vimrc ]; then
-    ln -s .vimrc ~/.vimrc
+    ln -s $PWD/.vimrc ~/.vimrc
 else
     echo ".vimrc already exists, skipping symlink creation."
 fi
@@ -76,7 +78,7 @@ fi
 # Apply the .zshrc configuration if it exists
 echo "Applying .zshrc configuration..."
 if [ ! -e ~/.zshrc ]; then
-    ln -s .zshrc ~/.zshrc
+    ln -s $PWD/.zshrc ~/.zshrc
 else
     echo ".zshrc already exists, skipping symlink creation."
 fi
