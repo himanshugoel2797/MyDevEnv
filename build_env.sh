@@ -1,22 +1,32 @@
 #!/bin/sh
 
 sudo apt update
-sudo apt install python3 python3-pip cargo 
+sudo apt install -y zsh git curl wget build-essential
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Install neovim
-sudo apt install neovim
-sudo apt install python3-neovim
+# Install miniforge
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+zsh Miniforge3-${uname}-$(uname -m).sh
 
-sudo apt install fasd
-sudo apt install mosh
-sudo apt install direnv
+# Install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+zsh ~/.fzf/install
 
-cargo install lsd
-cargo install bat
+# Install conda packages
+conda install -y python numpy scipy scikit-learn matplotlib ipykernel scikit-image neovim
 
-pip install thefuck
+# Install neovim python package
+python3 -m pip install --user --upgrade pynvim
 
-#Add ~/.cargo/bin to PATH in .bashrc
-echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
-#Add direnv hook to .bashrc
-echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+# Apply the .vimrc configuration
+echo "Applying .vimrc configuration..."
+if [ -f .vimrc ]; then
+    ln -s ~/.vimrc .vimrc
+fi
+
+# Apply the .zshrc configuration if it exists
+echo "Applying .zshrc configuration..."
+if [ -f .zshrc ]; then
+    ln -s ~/.zshrc .zshrc
+fi
