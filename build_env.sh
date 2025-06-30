@@ -23,14 +23,16 @@ else
 fi
 
 # Install miniforge if not already installed
-if ! command -v conda &> /dev/null; then
-    echo "Miniforge not found. Installing Miniforge..."
-    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-    zsh Miniforge3-${uname}-$(uname -m).sh
-    rm Miniforge3-${uname}-$(uname -m).sh
-    echo "Miniforge installed successfully."
-else
+if [ "$1" = "--skip-conda" ]; then
+    echo "Skipping Miniforge installation as requested."
+elif [ -d "$HOME/miniforge3" ]; then
     echo "Miniforge is already installed."
+else
+    echo "Installing Miniforge..."
+    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+    zsh Miniforge3-$(uname)-$(uname -m).sh
+    rm Miniforge3-$(uname)-$(uname -m).sh
+    echo "Miniforge installed successfully."
 fi
 
 # Install fzf
