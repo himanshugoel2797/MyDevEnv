@@ -67,12 +67,16 @@ fi
 
 # Apply the .vimrc configuration
 echo "Applying .vimrc configuration..."
-if [ -f .vimrc ]; then
+if [ ! -e ~/.vimrc ]; then
     ln -s .vimrc ~/.vimrc
+else
+    echo ".vimrc already exists, skipping symlink creation."
 fi
 
 # Apply the .zshrc configuration if it exists
 echo "Applying .zshrc configuration..."
-if [ -f .zshrc ]; then
+if [ ! -e ~/.zshrc ]; then
     ln -s .zshrc ~/.zshrc
+else
+    echo ".zshrc already exists, skipping symlink creation."
 fi
