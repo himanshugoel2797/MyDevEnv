@@ -1,7 +1,22 @@
 #!/bin/sh
+# Sets up my development environment on a new machine.
+# Usage: ./build_env.sh --no-sudo # to skip sudo commands.
+set -e
+# Check if sudo is required
+if [ "$1" != "--no-sudo" ]; then
+    if [ "$(id -u)" -ne 0 ]; then
+        echo "This script requires sudo privileges. Please run it with sudo or prefix with --no-sudo to skip sudo commands."
+        exit 1
+    fi
+fi
 
-sudo apt update
-sudo apt install -y zsh git curl wget build-essential
+# Install dependencies if sudo is available
+if [ "$(id -u)" -eq 0 ]; then
+    echo "Installing dependencies..."
+    sudo apt update
+    sudo apt install -y zsh git curl wget build-essential
+fi
+
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
