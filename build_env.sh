@@ -1,6 +1,6 @@
 #!/bin/sh
 # Sets up my development environment on a new machine.
-# Usage: ./build_env.sh --no-sudo # to skip sudo commands.
+# Usage: ./build_env.sh --no-sudo --skip-conda # to skip sudo commands.
 set -e
 # Check if sudo is required
 if [ "$1" != "--no-sudo" ]; then
@@ -47,17 +47,26 @@ else
     echo "fzf is already installed."
 fi
 
-# Install conda packages
-conda install -y python numpy scipy scikit-learn matplotlib ipykernel scikit-image neovim
+# Install conda packages into the base environment
+# Skip this step if --skip-conda is passed
+if [ "$1" = "--skip-conda" ]; then
+    echo "Skipping conda package installation as requested."
+else
+    echo "Installing conda packages..."
+    # Create base environment if it doesn't exist
+    if ! conda info --envs | grep -q "base"; then
+        conda create -y -n base python numpy scipy scikit-learn matplotlib ipykernel scikit-image
+    fi
+fi
 
 # Install neovim python package
-python3 -m pip install --user --upgrade pynvim
+#python3 -m pip install --user --upgrade pynvim
 
 # Apply the .vimrc configuration
-echo "Applying .vimrc configuration..."
-if [ -f .vimrc ]; then
-    ln -s ~/.vimrc .vimrc
-fi
+#echo "Applying .vimrc configuration..."
+#if [ -f .vimrc ]; then
+#    ln -s ~/.vimrc .vimrc
+#fi
 
 # Apply the .zshrc configuration if it exists
 echo "Applying .zshrc configuration..."
