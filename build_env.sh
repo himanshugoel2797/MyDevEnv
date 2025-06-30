@@ -1,14 +1,7 @@
 #!/bin/sh
 # Sets up my development environment on a new machine.
-# Usage: ./build_env.sh --no-sudo --skip-conda # to skip sudo commands.
+# Usage: ./build_env.sh --skip-conda # to skip conda package installation.
 set -e
-# Check if sudo is required
-if [ "$1" != "--no-sudo" ]; then
-    if [ "$(id -u)" -ne 0 ]; then
-        echo "This script requires sudo privileges. Please run it with sudo or prefix with --no-sudo to skip sudo commands."
-        exit 1
-    fi
-fi
 
 # Install dependencies if sudo is available
 if [ "$(id -u)" -eq 0 ]; then
