@@ -20,7 +20,12 @@ else
 fi
 
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Installing oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+    echo "oh-my-zsh is already installed."
+fi
 
 # Install miniforge if not already installed
 if ! command -v conda &> /dev/null; then
@@ -34,8 +39,13 @@ else
 fi
 
 # Install fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-zsh ~/.fzf/install
+if [ ! -d "$HOME/.fzf" ]; then
+    echo "Installing fzf..."
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    zsh ~/.fzf/install
+else
+    echo "fzf is already installed."
+fi
 
 # Install conda packages
 conda install -y python numpy scipy scikit-learn matplotlib ipykernel scikit-image neovim
