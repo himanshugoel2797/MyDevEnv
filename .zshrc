@@ -70,7 +70,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git conda fzf gh python ssh sudo vscode zsh-navigation-tools zsh-interactive-cd)
+plugins=(git conda fzf gh python pyenv ssh sudo vscode zsh-navigation-tools zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
